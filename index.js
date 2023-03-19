@@ -22,6 +22,10 @@ let messages = [
 ];
 
 const getAIReply = async (messages) => {
+  if (messages.length > 10) {
+    messages.splice(0, 3);
+  }
+
   const { data } = await openAI.createChatCompletion({
     model: process.env.OPENAI_GPT_MODEL || "gpt-3.5-turbo",
     max_tokens: Number(process.env.OPENAI_MAX_TOKENS) || 300,
